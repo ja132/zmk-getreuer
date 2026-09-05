@@ -1,0 +1,23 @@
+/*
+ * Select Word behavior nodes. Include from your keymap:
+ *   #include <behaviors/select_word.dtsi>
+ *   #include <dt-bindings/zmk/select_word.h>
+ */
+#include <dt-bindings/zmk/select_word.h>
+
+/ {
+    behaviors {
+        /omit-if-no-ref/ select_word: select_word {
+            compatible = "zmk,behavior-select-word";
+            #binding-cells = <1>;
+            display-name = "Select Word";
+        };
+
+        /omit-if-no-ref/ select_word_mac: select_word_mac {
+            compatible = "zmk,behavior-select-word";
+            #binding-cells = <1>;
+            mac;
+            display-name = "Select Word (Mac)";
+        };
+    };
+};

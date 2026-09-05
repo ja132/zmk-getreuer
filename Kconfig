@@ -1,0 +1,17 @@
+# ZMK ports of Pascal Getreuer's Select Word, Cyclotab and Orbital Mouse.
+
+config ZMK_BEHAVIOR_SELECT_WORD
+    bool "Select Word behavior"
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_SELECT_WORD_ENABLED
+
+config ZMK_BEHAVIOR_CYCLOTAB
+    bool "Cyclotab (Alt+Tab swapper) behavior"
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_CYCLOTAB_ENABLED
+
+config ZMK_BEHAVIOR_ORBITAL_MOUSE
+    bool "Orbital Mouse behavior"
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_ORBITAL_MOUSE_ENABLED
+    select ZMK_POINTING

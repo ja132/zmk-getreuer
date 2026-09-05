@@ -1,0 +1,51 @@
+# Orbital Mouse behavior (ZMK port of Pascal Getreuer's QMK module).
+# https://getreuer.info/posts/keyboards/orbital-mouse/index.html
+
+description: |
+  Tank-control mouse keys. Param is one of the OM_* codes from
+  <dt-bindings/zmk/orbital_mouse.h>. The node must be referenced by a
+  zmk,input-listener so its input events reach the HID mouse report.
+
+compatible: "zmk,behavior-orbital-mouse"
+
+include: one_param.yaml
+
+properties:
+  speed-curve:
+    type: array
+    default: [24, 24, 24, 32, 58, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66]
+    description: |
+      16 speed values (0-255). Entry n is the speed after holding a movement
+      key for 0.256*n seconds; values are linearly interpolated in between.
+  radius:
+    type: int
+    default: 36
+    description: Orbit radius in pixels when steering. Must be in [0, 63].
+  slow-move-percent:
+    type: int
+    default: 33
+    description: Movement speed while OM_SLOW is held, as a percentage (0-99).
+  slow-turn-percent:
+    type: int
+    default: 50
+    description: Turning speed while OM_SLOW is held, as a percentage (0-99).
+  fast-move-percent:
+    type: int
+    default: 300
+    description: Movement speed while OM_FAST is held, as a percentage (< 1600).
+  fast-turn-percent:
+    type: int
+    default: 200
+    description: Turning speed while OM_FAST is held, as a percentage (< 1600).
+  wheel-speed-percent:
+    type: int
+    default: 20
+    description: Wheel steps per frame, as a percentage (e.g. 20 = 0.2 steps/frame, < 400).
+  dbl-delay-ms:
+    type: int
+    default: 50
+    description: Gap between the two clicks of OM_DBLS.
+  interval-ms:
+    type: int
+    default: 16
+    description: Frame interval of the movement task.

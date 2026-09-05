@@ -1,0 +1,22 @@
+# Select Word behavior (ZMK port of Pascal Getreuer's QMK module).
+# https://getreuer.info/posts/keyboards/select-word/index.html
+
+description: |
+  Smart word / line selection. Param is one of SW_WORD, SW_BACK, SW_LINE,
+  SW_LINE_UP from <dt-bindings/zmk/select_word.h>. Pressing repeatedly (or
+  holding) extends the selection.
+
+compatible: "zmk,behavior-select-word"
+
+include: one_param.yaml
+
+properties:
+  mac:
+    type: boolean
+    description: Send macOS hotkeys (Alt/Cmd + arrows) instead of Windows/Linux ones.
+  timeout-ms:
+    type: int
+    default: 5000
+    description: |
+      Idle time after which the internal selection state is forgotten.
+      0 disables the timeout.

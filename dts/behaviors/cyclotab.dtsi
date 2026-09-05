@@ -1,0 +1,15 @@
+/*
+ * Cyclotab behavior node. Include from your keymap:
+ *   #include <behaviors/cyclotab.dtsi>
+ * then use e.g. &cyclotab LA(TAB), &cyclotab LS(LA(TAB)), &cyclotab LG(TAB).
+ */
+/ {
+    behaviors {
+        /omit-if-no-ref/ cyclotab: cyclotab {
+            compatible = "zmk,behavior-cyclotab";
+            #binding-cells = <1>;
+            timeout-ms = <1000>;
+            display-name = "Cyclotab";
+        };
+    };
+};

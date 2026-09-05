@@ -1,0 +1,25 @@
+# Cyclotab behavior (ZMK port of Pascal Getreuer's QMK module).
+# https://getreuer.info/posts/keyboards/cyclotab/index.html
+
+description: |
+  Alt+Tab (and friends) swapper. Param is a modified keycode such as LA(TAB),
+  LS(LA(TAB)), LG(TAB) or LG(GRAVE). The non-Shift modifiers are held after
+  the key is released so the hotkey can be tapped repeatedly; Shift is only
+  applied to the individual tap. The held modifiers are released when any
+  other key is pressed (that key is consumed), when the layer the behavior
+  was pressed on is deactivated, or after timeout-ms.
+
+compatible: "zmk,behavior-cyclotab"
+
+include: one_param.yaml
+
+properties:
+  timeout-ms:
+    type: int
+    default: 1000
+    description: Release the held modifiers after this many ms of inactivity. 0 disables.
+  pass-through:
+    type: boolean
+    description: |
+      If set, the key press that ends the cycle is sent to the host instead of
+      being swallowed.

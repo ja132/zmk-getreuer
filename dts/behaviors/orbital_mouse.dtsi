@@ -1,0 +1,22 @@
+/*
+ * Orbital Mouse behavior node + input listener. Include from your keymap:
+ *   #include <behaviors/orbital_mouse.dtsi>
+ *   #include <dt-bindings/zmk/orbital_mouse.h>
+ * and set CONFIG_ZMK_POINTING=y in your .conf.
+ */
+#include <dt-bindings/zmk/orbital_mouse.h>
+
+/ {
+    behaviors {
+        /omit-if-no-ref/ om: orbital_mouse {
+            compatible = "zmk,behavior-orbital-mouse";
+            #binding-cells = <1>;
+            display-name = "Orbital Mouse";
+        };
+    };
+
+    om_input_listener: om_input_listener {
+        compatible = "zmk,input-listener";
+        device = <&om>;
+    };
+};
