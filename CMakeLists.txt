@@ -14,6 +14,14 @@
 # references is not compiled at all.
 zephyr_include_directories(include)
 
-target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_SELECT_WORD   app PRIVATE src/behavior_select_word.c)
-target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_CYCLOTAB      app PRIVATE src/behavior_cyclotab.c)
-target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_ORBITAL_MOUSE app PRIVATE src/behavior_orbital_mouse.c)
+# On a split keyboard only the central half resolves keymap bindings and owns
+# the HID/endpoints subsystem. Building these sources on the peripheral gives
+# link errors for zmk_hid_*, zmk_endpoints_send_report and
+# raise_zmk_keycode_state_changed. Same guard urob's ZMK modules use.
+if((NOT CONFIG_ZMK_SPLIT) OR CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+
+  target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_SELECT_WORD   app PRIVATE src/behavior_select_word.c)
+  target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_CYCLOTAB      app PRIVATE src/behavior_cyclotab.c)
+  target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_ORBITAL_MOUSE app PRIVATE src/behavior_orbital_mouse.c)
+
+endif()
